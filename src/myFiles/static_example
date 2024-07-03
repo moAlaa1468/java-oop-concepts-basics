@@ -1,0 +1,73 @@
+
+
+Static Variables:
+
+MIN_PASSWORD_LENGTH: A constant representing the minimum length a password should have.
+objectCount: A counter to keep track of the number of PasswordValidator objects created.
+correctPassword: A default correct password for validation purposes.
+Constructor:
+
+Increments the objectCount every time a new PasswordValidator object is created.
+Static Methods:
+
+isPasswordCorrect(String password): Checks if the provided password matches the correctPassword.
+isPasswordLengthValid(String password): Checks if the provided password meets
+ the MIN_PASSWORD_LENGTH criterion.
+getObjectCount(): Returns the number of PasswordValidator objects created.
+Main Method:
+
+Demonstrates creating PasswordValidator objects.
+Tests the static methods to check the password validity and object count.
+
+
+
+
+
+
+
+
+
+
+
+public class PasswordValidator {
+
+    // Static variables
+    private static final int MIN_PASSWORD_LENGTH = 8;
+    private static int objectCount = 0;
+    private static String correctPassword = "defaultPassword";
+
+    // Constructor to keep track of object creation
+    public PasswordValidator() {
+        objectCount++;
+    }
+
+    // Static method to check all conditions for a password
+    public static boolean isPasswordValid(String password) {
+        boolean isCorrect = correctPassword.equals(password);
+        boolean isLengthValid = password.length() >= MIN_PASSWORD_LENGTH;
+
+        System.out.println("Password Correct: " + isCorrect);
+        System.out.println("Password Length Valid: " + isLengthValid);
+
+        return isCorrect && isLengthValid;
+    }
+
+    // Static method to get the number of objects created
+    public static int getObjectCount() {
+        return objectCount;
+    }
+
+    // Main method to demonstrate the usage
+    public static void main(String[] args) {
+        // Creating objects
+        PasswordValidator validator1 = new PasswordValidator();
+        PasswordValidator validator2 = new PasswordValidator();
+
+        // Check password validity
+        String testPassword = "defaultPassword";
+        System.out.println("Is password valid? " + PasswordValidator.isPasswordValid(testPassword));
+
+        // Get the number of objects created
+        System.out.println("Number of objects created: " + PasswordValidator.getObjectCount());
+    }
+}

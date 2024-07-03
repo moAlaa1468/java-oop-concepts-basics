@@ -1,0 +1,27 @@
+
+Create class Called Student :
+Attributes:
+
+min_password_length: A constant representing the minimum length a password should have.
+objectCount: A counter to keep track of the number of Students objects created.
+correctPassword: A default correct password for validation purposes.
+
+----------------------------
+Methods:
+----
+Constructor:
+Increments the objectCount every time a new Student object is created.
+------
+Static Methods:
+isPasswordCorrect(String password): Checks if the provided password matches the correctPassword.
+isPasswordLengthValid(String password): Checks if the provided password meets
+the min_password_length condition.
+getObjectCount(): Returns the number of Students objects created.
+
+-----------------------------------------------
+Main Method:
+Demonstrates creating Student objects.
+Tests the static methods to check the password validity and object count.
+
+
+

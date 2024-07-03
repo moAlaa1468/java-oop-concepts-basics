@@ -1,0 +1,157 @@
+------------------------------------------------------------------------------------------------
+| Property                       | Description                                                                                        |
+------------------------------------------------------------------------------------------------
+| Declaration                    | Interfaces are declared using the `interface` keyword.                                             |
+------------------------------------------------------------------------------------------------
+| Methods                        | Methods in interfaces are abstract by default and do not have a body (until Java 8).               |
+------------------------------------------------------------------------------------------------
+| Fields                         | Fields in interfaces are `public`, `static`, and `final` by default.                                |
+------------------------------------------------------------------------------------------------
+| Implementation                 | A class that implements an interface must provide implementations for all its methods.             |
+------------------------------------------------------------------------------------------------
+| Multiple Inheritance           | A class can implement multiple interfaces, allowing for multiple inheritance of type.              |
+------------------------------------------------------------------------------------------------
+| Default Methods (Java 8+)      | Interfaces can have default methods with a body.                                                   |
+------------------------------------------------------------------------------------------------
+| Static Methods (Java 8+)       | Interfaces can have static methods with a body.                                                    |
+------------------------------------------------------------------------------------------------
+| Private Methods (Java 9+)      | Interfaces can have private methods to share code between default methods.                         |
+------------------------------------------------------------------------------------------------
+| No Constructor                 | Interfaces cannot have constructors because they cannot be instantiated.                           |
+------------------------------------------------------------------------------------------------
+| Extending Other Interfaces     | An interface can extend one or more other interfaces.                                              |
+------------------------------------------------------------------------------------------------
+| Marker Interfaces              | Interfaces with no methods, used to mark classes that implement
+                                 |   them for special behavior.
+------------------------------------------------------------------------------------------------
+| Functional Interfaces (Java 8+) | Interfaces with a single abstract method, used as the basis for
+|                                    lambda expressions and method references. |
+------------------------------------------------------------------------------------------------
+
+
+======================================= example of using interfaces =============================================
+
+
+Vehicle Interface:
+
+Defines a constant field MAX_SPEED.
+Declares two abstract methods: start() and stop().
+Provides a default method displayMaxSpeed().
+Provides a static method service().
+Uses a private method log(String message) within another default method checkEngine().
+Car Class:
+
+Implements the Vehicle interface.
+Provides implementations for start() and stop() methods.
+Adds an additional method honk() specific to Car.
+Electric Interface:
+
+Extends Vehicle and adds a new method chargeBattery().
+ElectricCar Class:
+
+Implements the Electric interface.
+Provides implementations for start(), stop(), and chargeBattery() methods.
+Main Class:
+
+Demonstrates the usage of Car and ElectricCar objects.
+Calls the service() static method from the Vehicle interface.
+
+
+
+=========================================================
+
+// Define the interface
+interface Vehicle {
+    // Constant field (public, static, final by default)
+    int MAX_SPEED = 120;
+
+    // Abstract method (public abstract by default)
+    void start();
+
+    // Abstract method
+    void stop();
+
+    // Default method (available from Java 8)
+    default void displayMaxSpeed() {
+        System.out.println("The maximum speed is " + MAX_SPEED + " km/h.");
+    }
+
+    // Static method (available from Java 8)
+    static void service() {
+        System.out.println("Vehicle needs servicing.");
+    }
+
+    // Private method (available from Java 9)
+    private void log(String message) {
+        System.out.println("Log: " + message);
+    }
+
+    // Default method using private method
+    default void checkEngine() {
+        log("Checking engine...");
+        System.out.println("Engine is fine.");
+    }
+}
+
+// Implement the interface in a class
+class Car implements Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Car is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Car is stopping.");
+    }
+
+    // Additional method specific to Car
+    public void honk() {
+        System.out.println("Car is honking.");
+    }
+}
+
+// Another interface extending Vehicle
+interface Electric extends Vehicle {
+    void chargeBattery();
+}
+
+// Implementing the Electric interface
+class ElectricCar implements Electric {
+    @Override
+    public void start() {
+        System.out.println("Electric car is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Electric car is stopping.");
+    }
+
+    @Override
+    public void chargeBattery() {
+        System.out.println("Electric car is charging battery.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.start();
+        car.displayMaxSpeed();
+        car.checkEngine();
+        car.stop();
+        car.honk();
+
+        ElectricCar electricCar = new ElectricCar();
+        electricCar.start();
+        electricCar.displayMaxSpeed();
+        electricCar.checkEngine();
+        electricCar.chargeBattery();
+        electricCar.stop();
+
+        Vehicle.service(); // Static method in interface
+    }
+}
+
+
